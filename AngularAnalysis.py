@@ -687,7 +687,7 @@ if do_ggAnalysis:
             cos_sq_err = 0.05'''
 
 
-            if angle >= min_accepted_angle and angle <= max_accepted_angle:
+            if angle >= min_accepted_angle and angle < max_accepted_angle:
                 sum_counts = 0.0
                 sum_counts_err2 = 0.0
                 for biny in range(ybin_lo, ybin_hi + 1):
@@ -873,9 +873,13 @@ if do_ggAnalysis:
         box.AddText("W(#Delta#sigma)/a_{0}")
         for i in range(fitAng.GetNpar()):
             name = fitAng.GetParName(i) or f"p{i}"
-            val  = fitAng.GetParameter(i) / fitAng.GetParameter(0)
-            err  = val * math.sqrt((fitAng.GetParError(i)/fitAng.GetParameter(i))**2 + (fitAng.GetParError(0)/fitAng.GetParameter(0))**2)
-            print(f"a{i} = {val}, error = {err}")
+            if fitAng.GetParameter(i) != 0 and fitAng.GetParameter(0) != 0:
+                val  = fitAng.GetParameter(i) / fitAng.GetParameter(0)
+                err  = val * math.sqrt((fitAng.GetParError(i)/fitAng.GetParameter(i))**2 + (fitAng.GetParError(0)/fitAng.GetParameter(0))**2)
+                print(f"a{i} = {val}, error = {err}")
+            else:
+                val = 0
+                err = 0
             box.AddText(f"{name} = {val:.3g} #pm {err:.3g}")
         chi2 = fitAng.GetChisquare()
         ndf  = fitAng.GetNDF()
@@ -900,9 +904,13 @@ if do_ggAnalysis:
         box.AddText("W(#Delta#sigma)/a_{0}")
         for i in range(fitCos.GetNpar()):
             name = fitCos.GetParName(i) or f"p{i}"
-            val  = fitCos.GetParameter(i) / fitCos.GetParameter(0)
-            err  = val * math.sqrt((fitCos.GetParError(i)/fitCos.GetParameter(i))**2 + (fitCos.GetParError(0)/fitCos.GetParameter(0))**2)
-            print(f"a{i} = {val}, error = {err}")
+            if fitCos.GetParameter(i) !=0 and fitCos.GetParameter(0) != 0:
+                val  = fitCos.GetParameter(i) / fitCos.GetParameter(0)
+                err  = val * math.sqrt((fitCos.GetParError(i)/fitCos.GetParameter(i))**2 + (fitCos.GetParError(0)/fitCos.GetParameter(0))**2)
+                print(f"a{i} = {val}, error = {err}")
+            else:
+                val = 0
+                err = 0
             box.AddText(f"{name} = {val:.3g} #pm {err:.3g}")
         chi2 = fitCos.GetChisquare()
         ndf  = fitCos.GetNDF()
@@ -927,9 +935,13 @@ if do_ggAnalysis:
         box.AddText("W(#Delta#sigma)/a_{0}")
         for i in range(fitCos_sq.GetNpar()):
             name = fitCos_sq.GetParName(i) or f"p{i}"
-            val  = fitCos_sq.GetParameter(i) / fitCos_sq.GetParameter(0)
-            err  = val * math.sqrt((fitCos_sq.GetParError(i)/fitCos_sq.GetParameter(i))**2 + (fitCos_sq.GetParError(0)/fitCos_sq.GetParameter(0))**2)
-            print(f"a{i} = {val}, error = {err}")
+            if fitCos_sq.GetParameter(i) !=0 and fitCos_sq.GetParameter(0) != 0:
+                val  = fitCos_sq.GetParameter(i) / fitCos_sq.GetParameter(0)
+                err  = val * math.sqrt((fitCos_sq.GetParError(i)/fitCos_sq.GetParameter(i))**2 + (fitCos_sq.GetParError(0)/fitCos_sq.GetParameter(0))**2)
+                print(f"a{i} = {val}, error = {err}")
+            else:
+                val = 0
+                err = 0
             box.AddText(f"{name} = {val:.3g} #pm {err:.3g}")
         chi2 = fitCos_sq.GetChisquare()
         ndf  = fitCos_sq.GetNDF()
@@ -997,7 +1009,7 @@ if do_ngAnalysis:
             cos_theta_sq = cos_theta * cos_theta
             cos_err = abs(sin_theta) * math.radians(angle_err)
             cos_sq_err = 2 * abs(cos_theta * sin_theta) * math.radians(angle_err)
-            if angle >= min_accepted_angle and angle <= max_accepted_angle:
+            if angle >= min_accepted_angle and angle < max_accepted_angle:
                 sum_counts = 0.0
                 sum_counts_err2 = 0.0
                 for biny in range(ybin_lo, ybin_hi + 1):
@@ -1149,9 +1161,13 @@ if do_ngAnalysis:
         box.AddText("W(#Delta#sigma)/a_{0}")
         for i in range(fitAng.GetNpar()):
             name = fitAng.GetParName(i) or f"p{i}"
-            val  = fitAng.GetParameter(i) / fitAng.GetParameter(0)
-            err  = val * math.sqrt((fitAng.GetParError(i)/fitAng.GetParameter(i))**2 + (fitAng.GetParError(0)/fitAng.GetParameter(0))**2)
-            print(f"a{i} = {val}, error = {err}")
+            if fitAng.GetParameter(i) !=0 and fitAng.GetParameter(0) != 0:
+                val  = fitAng.GetParameter(i) / fitAng.GetParameter(0)
+                err  = val * math.sqrt((fitAng.GetParError(i)/fitAng.GetParameter(i))**2 + (fitAng.GetParError(0)/fitAng.GetParameter(0))**2)
+                print(f"a{i} = {val}, error = {err}")
+            else: 
+                val = 0
+                err = 0
             box.AddText(f"{name} = {val:.3g} #pm {err:.3g}")
         chi2 = fitAng.GetChisquare()
         ndf  = fitAng.GetNDF()
@@ -1175,9 +1191,13 @@ if do_ngAnalysis:
         box.AddText("W(#Delta#sigma)/a_{0}")
         for i in range(fitCos.GetNpar()):
             name = fitCos.GetParName(i) or f"p{i}"
-            val  = fitCos.GetParameter(i) / fitCos.GetParameter(0)
-            err  = val * math.sqrt((fitCos.GetParError(i)/fitCos.GetParameter(i))**2 + (fitCos.GetParError(0)/fitCos.GetParameter(0))**2)
-            print(f"a{i} = {val}, error = {err}")
+            if fitCos.GetParameter(i) !=0 and fitCos.GetParameter(0) != 0:
+                val  = fitCos.GetParameter(i) / fitCos.GetParameter(0)
+                err  = val * math.sqrt((fitCos.GetParError(i)/fitCos.GetParameter(i))**2 + (fitCos.GetParError(0)/fitCos.GetParameter(0))**2)
+                print(f"a{i} = {val}, error = {err}")
+            else:
+                val = 0
+                err = 0
             box.AddText(f"{name} = {val:.3g} #pm {err:.3g}")
         chi2 = fitCos.GetChisquare()
         ndf  = fitCos.GetNDF()
@@ -1201,9 +1221,13 @@ if do_ngAnalysis:
         box.AddText("W(#Delta#sigma)/a_{0}")
         for i in range(fitCos_sq.GetNpar()):
             name = fitCos_sq.GetParName(i) or f"p{i}"
-            val  = fitCos_sq.GetParameter(i) / fitCos_sq.GetParameter(0)
-            err  = val * math.sqrt((fitCos_sq.GetParError(i)/fitCos_sq.GetParameter(i))**2 + (fitCos_sq.GetParError(0)/fitCos_sq.GetParameter(0))**2)
-            print(f"a{i} = {val}, error = {err}")
+            if fitCos_sq.GetParameter(i) !=0 and fitCos_sq.GetParameter(0) != 0:
+                val  = fitCos_sq.GetParameter(i) / fitCos_sq.GetParameter(0)
+                err  = val * math.sqrt((fitCos_sq.GetParError(i)/fitCos_sq.GetParameter(i))**2 + (fitCos_sq.GetParError(0)/fitCos_sq.GetParameter(0))**2)
+                print(f"a{i} = {val}, error = {err}")
+            else:
+                val = 0
+                err = 0
             box.AddText(f"{name} = {val:.3g} #pm {err:.3g}")
         chi2 = fitCos_sq.GetChisquare()
         ndf  = fitCos_sq.GetNDF()
